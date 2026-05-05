@@ -151,25 +151,13 @@ jobs:
       - name: Build generic and composeApp APKs
         run: >
           ./gradlew
-          :app:assembleGenericRelease
-          :composeApp:assembleGoogleplayRelease
-          -PtasksKeyAlias=${{ secrets.GENERIC_KEY_ALIAS }}
-          -PtasksStoreFile=${{ runner.temp }}/generic.jks
-          -PtasksStorePassword=${{ secrets.GENERIC_KEY_STORE_PASSWORD }}
-          -PtasksKeyPassword=${{ secrets.GENERIC_KEY_PASSWORD }}
-          -Ptasks_mapbox_key=${{ secrets.MAPBOX_KEY }}
+          :app:assembleGenericDebug
 
-      - name: Upload generic APK
+      - name: Upload debug APK
         uses: actions/upload-artifact@v7
         with:
-          name: app-generic-release.apk
-          path: app/build/outputs/apk/generic/release/app-generic-release.apk
-
-      - name: Upload composeApp APK
-        uses: actions/upload-artifact@v7
-        with:
-          name: composeApp-googleplay-release.apk
-          path: composeApp/build/outputs/apk/googleplay/release/composeApp-googleplay-release.apk
+          name: app-generic-debug.apk
+          path: app/build/outputs/apk/generic/debug/app-generic-debug.apk
 
   desktop-jar:
     runs-on: ubuntu-latest
